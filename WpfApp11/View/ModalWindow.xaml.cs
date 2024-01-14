@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace WpfApp11.View
+{
+    /// <summary>
+    /// Interaction logic for ModalWindow.xaml
+    /// </summary>
+    public partial class ModalWindow : Window
+    {
+        public bool Success { get; set; }
+        public string Input { get; set; }
+        public ModalWindow(Window window)
+        {
+            Owner = window;
+            InitializeComponent();
+        }
+        private void btnNormal_Ok(object sender, RoutedEventArgs e)
+        {
+            Success = true;
+            Input = txtInput.Text;
+            Close();
+
+        }
+
+        private void btnModal_Cencel(object sender, RoutedEventArgs e)
+        {
+            Success = false;
+            Close();
+        }
+
+        private void txtInput_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtInput.Text))
+            {
+                btnOk.IsEnabled = true;
+            }
+            else { btnOk.IsEnabled = false; }
+
+        }
+    }
+}
